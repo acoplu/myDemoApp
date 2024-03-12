@@ -1,13 +1,19 @@
 <title>My application deployed automatically</title>
   <h1>Simple Web Application!</h1>
-  <p>This is a simple program that verifies if at least given number (input1) of elements in input1 that are also present in input2. Additionally, it checks if input4 contains a specific target string in input5. The method returns true if all conditions are met; otherwise, it returns false.</p>
+  <p>This is a simple program that verifies that input1 and input2 have at least the number of common elements given in input3, and checks that input4 contains a specific target string given in input5. The method returns true if all conditions are met; otherwise it returns false.</p>
+  <p>Format of inputs:</p>
+  <p>   -Enter a list of integers seperated by a newline character to input1 and input2</p>
+  <p>   -Enter a single count integer to input3</p>
+  <p>   -Enter a list of strings seperated by a newline character to input4</p>
+  <p>   -Enter a single target string to input5</p>
+  <br>
     Result is {{result}}
-
 
   <form action="compute" method="post">
         <textarea name="input1" rows="10" cols="30"></textarea>
         <textarea name="input2" rows="10" cols="30"></textarea>
         <textarea name="input3" rows="1" cols="30"></textarea>
+        <br>
         <textarea name="input4" rows="10" cols="30"></textarea>
         <textarea name="input5" rows="1" cols="30"></textarea>
         <br>
