@@ -5,6 +5,7 @@ import static spark.Spark.port;
 import static spark.Spark.post;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -13,14 +14,22 @@ import spark.template.mustache.MustacheTemplateEngine;
 
 public class App
 {
-    public static boolean search(ArrayList<Integer> array, int e) {
+    public static boolean search(ArrayList<Integer> arr1, ArrayList<Integer> arr2, int count, ArrayList<String> arr3, String target) {
         System.out.println("inside search");
-        if (array == null) return false;
+        if (arr1 == null) return false;
+        if (arr2 == null) return false;
+        if (arr3 == null) return false;
+        if (target == null) return false;
 
-        for (int elt : array) {
-            if (elt == e) return true;
+        int check = 0;
+        for(Integer i : arr1){
+            if(arr2.contains(i)){
+                check++;
+            }
         }
-        return false;
+        if(check < count) return false;
+
+        return arr3.contains(target);
     }
 
     public static void main(String[] args) {
@@ -35,19 +44,42 @@ public class App
             String input1 = req.queryParams("input1");
             java.util.Scanner sc1 = new java.util.Scanner(input1);
             sc1.useDelimiter("[;\r\n]+");
-            java.util.ArrayList<Integer> inputList = new java.util.ArrayList<>();
+            java.util.ArrayList<Integer> inputList1 = new java.util.ArrayList<>();
             while (sc1.hasNext())
             {
                 int value = Integer.parseInt(sc1.next().replaceAll("\\s",""));
-                inputList.add(value);
+                inputList1.add(value);
             }
-            System.out.println(inputList);
+            System.out.println(inputList1);
 
+            String input2 = req.queryParams("input2");
+            java.util.Scanner sc2 = new java.util.Scanner(input2);
+            sc2.useDelimiter("[;\r\n]+");
+            java.util.ArrayList<Integer> inputList2 = new java.util.ArrayList<>();
+            while (sc2.hasNext())
+            {
+                int value = Integer.parseInt(sc2.next().replaceAll("\\s",""));
+                inputList2.add(value);
+            }
+            System.out.println(inputList2);
 
-            String input2 = req.queryParams("input2").replaceAll("\\s","");
-            int input2AsInt = Integer.parseInt(input2);
+            String input3 = req.queryParams("input3").replaceAll("\\s","");
+            int count = Integer.parseInt(input3);
 
-            boolean result = App.search(inputList, input2AsInt);
+            String input4 = req.queryParams("input4");
+            java.util.Scanner sc3 = new java.util.Scanner(input4);
+            sc3.useDelimiter("[;\r\n]+");
+            java.util.ArrayList<String> inputList3 = new java.util.ArrayList<>();
+            while (sc3.hasNext())
+            {
+                String value = sc3.next().replaceAll("\\s","");
+                inputList3.add(value);
+            }
+            System.out.println(inputList3);
+
+            String target = req.queryParams("input5").replaceAll("\\s","");
+
+            boolean result = App.search(inputList1, inputList2, count, inputList3, target);
 
             Map map = new HashMap();
             map.put("result", result);
